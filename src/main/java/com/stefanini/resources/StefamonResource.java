@@ -3,17 +3,17 @@ package com.stefanini.resources;
 import com.stefanini.service.StefamonService;
 
 import javax.inject.Inject;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@ApplicationPath("/stefamon")
+@Path("/stefamon")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class StefamonResource {
 
     @Inject
-    StefamonService service;
+    private StefamonService service;
 
     @GET
     @Path("/todos")
