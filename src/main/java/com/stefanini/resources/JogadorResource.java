@@ -1,13 +1,17 @@
 package com.stefanini.resources;
 
-import com.stefanini.entity.Jogador;
+import com.stefanini.dto.jogador.JogadorAtualizacaoDTO;
+import com.stefanini.dto.jogador.JogadorCriacaoDTO;
+import com.stefanini.parser.JogadorParser;
 import com.stefanini.service.JogadorService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/jogador")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -17,35 +21,45 @@ public class JogadorResource {
     @Inject
     private JogadorService jogadorService;
 
+    @Inject
+    private JogadorParser jogadorParser;
+
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
-        return Response.status(Response.Status.OK).entity(jogadorService.pegarPorId(id)).build();
+        var jogadorDto = jogadorParser.entityToDto(jogadorService.pegarPorId(id));
+        return Response.ok().entity(jogadorDto).build();
     }
 
     @GET
-    @Path("/todos")
     public Response listarTodos() {
-        return Response.status(Response.Status.OK).entity(jogadorService.listarTodos()).build();
+        var jogadoresDtos = jogadorParser.entityToDto(jogadorService.listarTodos());
+        return Response.ok().entity(jogadoresDtos).build();
     }
 
     @POST
-    public Response salvar(@Valid Jogador jogador) {
+    public Response salvar(@Valid JogadorCriacaoDTO dto, @Context UriInfo uriInfo) {
+        var jogador = jogadorParser.dtoToEntity(dto);
         jogadorService.salvar(jogador);
-        return Response.status(Response.Status.CREATED).build();
+        var uriBuilder = uriInfo.getBaseUriBuilder();
+        uriBuilder.path(jogador.getId().toString()); // Cabeçalho Location
+        var jogadorDto = jogadorParser.entityToDto(jogador);
+        return Response.created(uriBuilder.build()).entity(jogadorDto).build();
     }
 
-    @POST
-    public Response alterar(@Valid Jogador jogador) {
-        jogadorService.alterar(jogador);
-        return Response.status(Response.Status.OK).build();
+    @PUT
+    @Path("/{id}")
+    public Response alterar(@PathParam("id") Long id, @Valid JogadorAtualizacaoDTO dto) {
+        var jogador = jogadorService.alterar(id, jogadorParser.dtoToEntity(dto));
+        var jogadorDto = jogadorParser.entityToDto(jogador);
+        return Response.ok().entity(jogadorDto).build();
     }
 
-    @POST
+    @DELETE
     @Path("/{id}")
     public Response deletar(@PathParam("id") Long id) {
         jogadorService.deletar(id);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.noContent().build();
     }
 
 }

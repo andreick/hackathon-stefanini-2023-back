@@ -1,5 +1,6 @@
 package com.stefanini.resources;
 
+import com.stefanini.parser.StefamonParser;
 import com.stefanini.service.StefamonService;
 
 import javax.inject.Inject;
@@ -13,18 +14,25 @@ import javax.ws.rs.core.Response;
 public class StefamonResource {
 
     @Inject
-    private StefamonService service;
+    private StefamonService stefamonService;
+
+    @Inject
+    private StefamonParser stefamonParser;
 
     @GET
     @Path("/todos")
     public Response listarTodos() {
-        return Response.status(Response.Status.OK).entity(service.listarTodos()).build();
+        var stefamons = stefamonService.listarTodos();
+        var stefamonsDtos = stefamonParser.entityToDTO(stefamons);
+        return Response.ok().entity(stefamonsDtos).build();
     }
 
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
-        return Response.status(Response.Status.OK).entity(service.pegarPorId(id)).build();
+        var stefamon = stefamonService.pegarPorId(id);
+        var stefamonDto = stefamonParser.entityToDTO(stefamon);
+        return Response.ok().entity(stefamonDto).build();
     }
 
 }
