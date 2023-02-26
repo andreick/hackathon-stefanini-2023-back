@@ -1,5 +1,7 @@
 package com.stefanini.handlers;
 
+import org.jboss.logging.Logger;
+
 import javax.persistence.PersistenceException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -8,8 +10,12 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class ConstraintViolationHandler implements ExceptionMapper<PersistenceException> {
+
+    private static final Logger LOGGER = Logger.getLogger(ConstraintViolationHandler.class);
+
     @Override
     public Response toResponse(PersistenceException e) {
+        LOGGER.error("Houve um erro relacionado ao banco", e);
         return Response
                 .status(Response.Status.INTERNAL_SERVER_ERROR)
                 .header("Content-Type", MediaType.TEXT_PLAIN)
