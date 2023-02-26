@@ -13,18 +13,17 @@ import javax.ws.rs.core.Response;
 public class StefamonResource {
 
     @Inject
-    private StefamonService service;
+    private StefamonService stefamonService;
 
     @GET
-    @Path("/todos")
     public Response listarTodos() {
-        return Response.status(Response.Status.OK).entity(service.listarTodos()).build();
+        return Response.status(Response.Status.OK).entity(stefamonService.listarTodos()).build();
     }
 
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
-        return Response.status(Response.Status.OK).entity(service.pegarPorId(id)).build();
+        return Response.status(Response.Status.OK).entity(stefamonService.pegarPorId(id)).build();
     }
 
 }
