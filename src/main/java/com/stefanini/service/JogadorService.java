@@ -1,12 +1,12 @@
 package com.stefanini.service;
 
 import com.stefanini.entity.Jogador;
-import com.stefanini.exceptions.RegraDeNegocioException;
+import com.stefanini.exceptions.JogadorNotFoundException;
+import com.stefanini.exceptions.NicknameConflictException;
 import com.stefanini.repository.JogadorRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,14 +16,23 @@ public class JogadorService {
     @Inject
     private JogadorRepository jogadorRepository;
 
-    public void salvar(Jogador jogador) {
-        jogadorRepository.save(jogador);
+    @Inject
+    private CriptografiaService criptografiaService;
+
+    public void salvar(Jogador novoJogador) {
+        jogadorRepository.findByNickname(novoJogador.getNickname()).ifPresent((jogador) -> {
+            throw new NicknameConflictException(jogador.getNickname());
+        });
+        var senhaCriptografada = criptografiaService.criptografar(novoJogador.getSenha());
+        novoJogador.setSenha(senhaCriptografada);
+        System.out.println(senhaCriptografada);
+        jogadorRepository.save(novoJogador);
     }
 
     public Jogador pegarPorId(Long id) {
         var jogador = jogadorRepository.findById(id);
         if (Objects.isNull(jogador)) {
-            throw new RegraDeNegocioException("Ocorreu um erro ao buscar o Jogador de id " + id, Response.Status.NOT_FOUND);
+            throw new JogadorNotFoundException(id);
         }
         return jogador;
     }

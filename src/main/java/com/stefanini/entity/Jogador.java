@@ -14,13 +14,13 @@ public class Jogador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String nickname;
 
-    @Column
+    @Column(nullable = false, length = 16)
     private String senha;
 
-    @Column
+    @Column(nullable = false)
     private BigDecimal saldo = BigDecimal.ZERO;
 
     @ManyToMany(fetch = FetchType.LAZY)
