@@ -1,5 +1,7 @@
 package com.stefanini.service;
 
+import com.stefanini.dto.jogador.JogadorLoginDTO;
+import com.stefanini.dto.jogador.JogadorUnauthorizedException;
 import com.stefanini.entity.Jogador;
 import com.stefanini.exceptions.JogadorNotFoundException;
 import com.stefanini.exceptions.NicknameConflictException;
@@ -49,5 +51,13 @@ public class JogadorService {
 
     public List<Jogador> listarTodos() {
         return jogadorRepository.listAll();
+    }
+
+    public void autenticar(JogadorLoginDTO dto) {
+        var jogador = jogadorRepository.findByNickname(dto.getNickname()).orElseThrow(JogadorUnauthorizedException::new);
+        String senha = criptografiaService.decriptografar(jogador.getSenha());
+        if (!senha.equals(dto.getSenha())) {
+            throw new JogadorUnauthorizedException();
+        }
     }
 }
