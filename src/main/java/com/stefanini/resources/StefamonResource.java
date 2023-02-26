@@ -24,15 +24,15 @@ public class StefamonResource {
     public Response listarTodos() {
         var stefamons = stefamonService.listarTodos();
         var stefamonsDtos = stefamonParser.entityToDTO(stefamons);
-        return Response.status(Response.Status.OK).entity(stefamonsDtos).build();
+        return Response.ok().entity(stefamonsDtos).build();
     }
 
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
         var stefamon = stefamonService.pegarPorId(id);
-        var stefamonsDto = stefamonParser.entityToDTO(stefamon);
-        return Response.status(Response.Status.OK).entity(stefamonsDto).build();
+        var stefamonDto = stefamonParser.entityToDTO(stefamon);
+        return Response.ok().entity(stefamonDto).build();
     }
 
 }

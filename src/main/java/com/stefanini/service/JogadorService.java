@@ -28,8 +28,10 @@ public class JogadorService {
         return jogador;
     }
 
-    public void alterar(Jogador jogador) {
-        jogadorRepository.update(jogador);
+    public Jogador alterar(Long id, Jogador jogadorAtualizado) {
+        var jogador = pegarPorId(id);
+        jogador.setSaldo(jogadorAtualizado.getSaldo());
+        return jogadorRepository.update(jogador);
     }
 
     public void deletar(Long id) {
