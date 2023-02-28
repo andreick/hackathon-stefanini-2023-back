@@ -1,4 +1,4 @@
-package com.stefanini.dto.jogador;
+package com.stefanini.exceptions.jogador;
 
 import com.stefanini.exceptions.RegraDeNegocioException;
 

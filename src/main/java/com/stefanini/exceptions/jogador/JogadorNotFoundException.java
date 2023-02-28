@@ -1,4 +1,6 @@
-package com.stefanini.exceptions;
+package com.stefanini.exceptions.jogador;
+
+import com.stefanini.exceptions.RegraDeNegocioException;
 
 import javax.ws.rs.core.Response;
 
