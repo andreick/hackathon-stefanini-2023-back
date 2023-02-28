@@ -10,7 +10,7 @@ public class CriptografiaService {
         return Base64.getEncoder().encodeToString(src.getBytes());
     }
 
-    public String decriptografar(String encodedString) {
+    public String descriptografar(String encodedString) {
         var bytes = Base64.getDecoder().decode(encodedString);
         return new String(bytes);
     }

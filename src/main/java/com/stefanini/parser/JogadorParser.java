@@ -1,7 +1,7 @@
 package com.stefanini.parser;
 
 import com.stefanini.dto.jogador.JogadorAtualizacaoDTO;
-import com.stefanini.dto.jogador.JogadorCriacaoDTO;
+import com.stefanini.dto.jogador.JogadorCadastroDTO;
 import com.stefanini.dto.jogador.JogadorDTO;
 import com.stefanini.entity.Jogador;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class JogadorParser {
 
-    public Jogador dtoToEntity(JogadorCriacaoDTO dto) {
+    public Jogador dtoToEntity(JogadorCadastroDTO dto) {
         return new Jogador(null, dto.getNickname(), dto.getSenha(), dto.getSaldo());
     }
 

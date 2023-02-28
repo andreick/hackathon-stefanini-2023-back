@@ -8,7 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/stefamon")
+@Path("/stefamons")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class StefamonResource {
@@ -20,7 +20,6 @@ public class StefamonResource {
     private StefamonParser stefamonParser;
 
     @GET
-    @Path("/todos")
     public Response listarTodos() {
         var stefamons = stefamonService.listarTodos();
         var stefamonsDtos = stefamonParser.entityToDTO(stefamons);
