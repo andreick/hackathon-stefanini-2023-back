@@ -21,7 +21,7 @@ public class Jogador {
     private String senha;
 
     @Column(nullable = false)
-    private BigDecimal saldo = BigDecimal.ZERO;
+    private BigDecimal saldo;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tb_jogador_stefamon",
@@ -40,7 +40,7 @@ public class Jogador {
         this.id = id;
         this.nickname = nickname;
         this.senha = senha;
-        this.saldo = saldo == null ? BigDecimal.ZERO : saldo;
+        this.saldo = Objects.requireNonNullElse(saldo, BigDecimal.ZERO);
     }
 
     public Long getId() {
@@ -73,10 +73,6 @@ public class Jogador {
 
     public List<Stefamon> getStefamons() {
         return stefamons;
-    }
-
-    public void setStefamons(List<Stefamon> stefamons) {
-        this.stefamons = stefamons;
     }
 
     @Override

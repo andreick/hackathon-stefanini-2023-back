@@ -5,7 +5,7 @@ import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-public class JogadorCriacaoDTO {
+public class JogadorCadastroDTO {
 
     @NotBlank
     private final String nickname;
@@ -17,7 +17,7 @@ public class JogadorCriacaoDTO {
     @PositiveOrZero
     private final BigDecimal saldo;
 
-    public JogadorCriacaoDTO(String nickname, String senha, BigDecimal saldo) {
+    public JogadorCadastroDTO(String nickname, String senha, BigDecimal saldo) {
         this.nickname = nickname;
         this.senha = senha;
         this.saldo = saldo;

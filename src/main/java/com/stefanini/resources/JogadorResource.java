@@ -1,7 +1,7 @@
 package com.stefanini.resources;
 
 import com.stefanini.dto.jogador.JogadorAtualizacaoDTO;
-import com.stefanini.dto.jogador.JogadorCriacaoDTO;
+import com.stefanini.dto.jogador.JogadorCadastroDTO;
 import com.stefanini.dto.jogador.JogadorLoginDTO;
 import com.stefanini.parser.JogadorParser;
 import com.stefanini.service.JogadorService;
@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
-@Path("/jogador")
+@Path("/jogadores")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class JogadorResource {
@@ -36,7 +36,7 @@ public class JogadorResource {
     }
 
     @POST
-    public Response salvar(@Valid JogadorCriacaoDTO dto, @Context UriInfo uriInfo) {
+    public Response salvar(@Valid JogadorCadastroDTO dto, @Context UriInfo uriInfo) {
         var jogador = jogadorParser.dtoToEntity(dto);
         jogadorService.salvar(jogador);
         var uriBuilder = uriInfo.getBaseUriBuilder();
@@ -61,6 +61,7 @@ public class JogadorResource {
     }
 
     @POST
+    @Path("/login")
     public Response login(@Valid JogadorLoginDTO dto) {
         jogadorService.autenticar(dto);
         return Response.ok().header(HttpHeaders.AUTHORIZATION, dto.getNickname()).build();

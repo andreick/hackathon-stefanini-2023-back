@@ -1,10 +1,10 @@
 package com.stefanini.service;
 
 import com.stefanini.dto.jogador.JogadorLoginDTO;
-import com.stefanini.dto.jogador.JogadorUnauthorizedException;
 import com.stefanini.entity.Jogador;
-import com.stefanini.exceptions.JogadorNotFoundException;
-import com.stefanini.exceptions.NicknameConflictException;
+import com.stefanini.exceptions.jogador.JogadorNotFoundException;
+import com.stefanini.exceptions.jogador.JogadorUnauthorizedException;
+import com.stefanini.exceptions.jogador.NicknameConflictException;
 import com.stefanini.repository.JogadorRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -25,9 +25,8 @@ public class JogadorService {
         jogadorRepository.findByNickname(novoJogador.getNickname()).ifPresent((jogador) -> {
             throw new NicknameConflictException(jogador.getNickname());
         });
-        var senhaCriptografada = criptografiaService.criptografar(novoJogador.getSenha());
+        String senhaCriptografada = criptografiaService.criptografar(novoJogador.getSenha());
         novoJogador.setSenha(senhaCriptografada);
-        System.out.println(senhaCriptografada);
         jogadorRepository.save(novoJogador);
     }
 
@@ -55,8 +54,8 @@ public class JogadorService {
 
     public void autenticar(JogadorLoginDTO dto) {
         var jogador = jogadorRepository.findByNickname(dto.getNickname()).orElseThrow(JogadorUnauthorizedException::new);
-        String senha = criptografiaService.decriptografar(jogador.getSenha());
-        if (!senha.equals(dto.getSenha())) {
+        String senha = criptografiaService.descriptografar(jogador.getSenha());
+        if (!Objects.equals(senha, dto.getSenha())) {
             throw new JogadorUnauthorizedException();
         }
     }

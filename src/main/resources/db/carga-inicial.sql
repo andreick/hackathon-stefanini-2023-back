@@ -229,5 +229,5 @@ INSERT INTO desafio.tb_stefamon (id, ataque, defesa, inteligencia, nome, poder, 
 INSERT INTO desafio.tb_stefamon (id, ataque, defesa, inteligencia, nome, poder, urlFoto, velocidade, vida) VALUES (146, 31, 72, 43, 'yiinaang', 29, 'https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/gfx/sprites/battle/yiinaang-front.png', 36, 200);
 INSERT INTO desafio.tb_stefamon (id, ataque, defesa, inteligencia, nome, poder, urlFoto, velocidade, vida) VALUES (131, 16, 71, 80, 'zunna', 68, 'https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/gfx/sprites/battle/zunna-front.png', 78, 90);
 
-INSERT INTO desafio.tb_jogador (nickname, senha, saldo) VALUES ("Yan", "Smhvbm5hdGFu", 2900.00);
+INSERT INTO desafio.tb_jogador (nickname, senha, saldo) VALUES ("Yan", "eWFuWmluaG8=", 2900.00);
 INSERT INTO desafio.tb_jogador (nickname, senha, saldo) VALUES ("Jhonnatan", "amhvbm5hdGFu", 700.00);
