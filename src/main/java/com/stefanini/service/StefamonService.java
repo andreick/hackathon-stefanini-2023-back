@@ -21,4 +21,8 @@ public class StefamonService {
     public StefamonDTO pegarPorId(Long id) {
         return repository.findByIdWithPrice(id).orElseThrow(() -> new StefamonNotFoundException(id));
     }
+
+    public List<StefamonDTO> listarStefamonsIniciais() {
+        return repository.listByPrice(5400.0);
+    }
 }
