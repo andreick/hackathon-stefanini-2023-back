@@ -2,6 +2,7 @@ package com.stefanini.parser;
 
 import com.stefanini.dto.stefamon.StefamonDTO;
 import com.stefanini.entity.Stefamon;
+import com.stefanini.dto.stefamon.StefamonComPreco;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
@@ -15,13 +16,14 @@ public class StefamonParser {
         return stefamon;
     }
 
-    public StefamonDTO entityToDTO(Stefamon stefamon) {
+    public StefamonDTO entityToDTO(StefamonComPreco stefamonComPreco) {
+        var stefamon = stefamonComPreco.getStefamon();
         return new StefamonDTO(stefamon.getId(), stefamon.getNome(), stefamon.getVida(), stefamon.getAtaque(),
                 stefamon.getDefesa(), stefamon.getInteligencia(), stefamon.getPoder(), stefamon.getVelocidade(),
-                stefamon.getUrlFoto());
+                stefamon.getUrlFoto(), stefamonComPreco.getPreco());
     }
 
-    public List<StefamonDTO> entityToDTO(List<Stefamon> stefamons) {
-        return stefamons.stream().map(this::entityToDTO).collect(Collectors.toList());
+    public List<StefamonDTO> entityToDTO(List<StefamonComPreco> stefamonsComPreco) {
+        return stefamonsComPreco.stream().map(this::entityToDTO).collect(Collectors.toList());
     }
 }

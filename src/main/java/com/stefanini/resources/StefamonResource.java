@@ -21,16 +21,16 @@ public class StefamonResource {
 
     @GET
     public Response listarTodos() {
-        var stefamons = stefamonService.listarTodos();
-        var stefamonsDtos = stefamonParser.entityToDTO(stefamons);
+        var stefamonsComPreco = stefamonService.listarTodosComPreco();
+        var stefamonsDtos = stefamonParser.entityToDTO(stefamonsComPreco);
         return Response.ok().entity(stefamonsDtos).build();
     }
 
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
-        var stefamon = stefamonService.pegarPorId(id);
-        var stefamonDto = stefamonParser.entityToDTO(stefamon);
+        var stefamonComPreco = stefamonService.pegarPorId(id);
+        var stefamonDto = stefamonParser.entityToDTO(stefamonComPreco);
         return Response.ok().entity(stefamonDto).build();
     }
 

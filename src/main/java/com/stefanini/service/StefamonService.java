@@ -1,14 +1,13 @@
 package com.stefanini.service;
 
-import com.stefanini.entity.Stefamon;
 import com.stefanini.exceptions.RegraDeNegocioException;
+import com.stefanini.dto.stefamon.StefamonComPreco;
 import com.stefanini.repository.StefamonRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.Objects;
 
 @ApplicationScoped
 public class StefamonService {
@@ -16,16 +15,12 @@ public class StefamonService {
     @Inject
     private StefamonRepository repository;
 
-    public List<Stefamon> listarTodos() {
-        return repository.listAll();
+    public List<StefamonComPreco> listarTodosComPreco() {
+        return repository.listAllWithPrice();
     }
 
-    public Stefamon pegarPorId(Long id) {
-        var stefamon = repository.findById(id);
-        if (Objects.isNull(stefamon)) {
-            throw new RegraDeNegocioException("Não encontramos nada com o id " + id, Response.Status.NOT_FOUND);
-        }
-        return stefamon;
+    public StefamonComPreco pegarPorId(Long id) {
+        return repository.findByIdWithPrice(id).orElseThrow(() -> new RegraDeNegocioException("Não encontramos nada com o id " + id, Response.Status.NOT_FOUND));
     }
 
 }
