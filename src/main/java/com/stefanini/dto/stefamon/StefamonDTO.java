@@ -1,6 +1,7 @@
 package com.stefanini.dto.stefamon;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class StefamonDTO {
 
@@ -25,7 +26,11 @@ public class StefamonDTO {
         this.poder = poder;
         this.velocidade = velocidade;
         this.urlFoto = urlFoto;
-        this.preco = preco;
+        this.preco = preco.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public StefamonDTO(Long id, String nome, Integer vida, Integer ataque, Integer defesa, Integer inteligencia, Integer poder, Integer velocidade, String urlFoto, Double preco) {
+        this(id, nome, vida, ataque, defesa, inteligencia, poder, velocidade, urlFoto, BigDecimal.valueOf(preco));
     }
 
     public Long getId() {
