@@ -20,7 +20,7 @@ public class StefamonInicialResource {
 
     @GET
     public Response listarTodos() {
-        var stefamonsDtos = stefamonService.listarStefamonsIniciais();
+        var stefamonsDtos = stefamonService.listarStefamonsIniciaisComPreco();
         return Response.ok().entity(stefamonsDtos).build();
     }
 }

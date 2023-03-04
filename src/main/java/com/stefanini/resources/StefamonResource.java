@@ -24,7 +24,7 @@ public class StefamonResource {
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
-        var stefamonDto = stefamonService.pegarPorId(id);
+        var stefamonDto = stefamonService.pegarPorIdComPreco(id);
         return Response.ok().entity(stefamonDto).build();
     }
 

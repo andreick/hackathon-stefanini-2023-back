@@ -8,7 +8,7 @@ public class JogadorDTO {
     private final String nickname;
     private final BigDecimal saldo;
 
-    public JogadorDTO(Long id, String nickname, String senha, BigDecimal saldo) {
+    public JogadorDTO(Long id, String nickname, BigDecimal saldo) {
         this.id = id;
         this.nickname = nickname;
         this.saldo = saldo;
