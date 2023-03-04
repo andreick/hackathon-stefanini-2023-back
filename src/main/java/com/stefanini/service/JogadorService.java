@@ -19,12 +19,19 @@ public class JogadorService {
     private JogadorRepository jogadorRepository;
 
     @Inject
+    private StefamonService stefamonService;
+
+    @Inject
     private CriptografiaService criptografiaService;
 
-    public void salvar(Jogador novoJogador) {
+    public void salvar(Jogador novoJogador, Long idStefamon) {
         jogadorRepository.findByNickname(novoJogador.getNickname()).ifPresent((jogador) -> {
             throw new NicknameConflictException(jogador.getNickname());
         });
+        if (!Objects.isNull(idStefamon)) {
+            var stefamon = stefamonService.pegarPorId(idStefamon);
+            novoJogador.adicionarStefamon(stefamon);
+        }
         String senhaCriptografada = criptografiaService.criptografar(novoJogador.getSenha());
         novoJogador.setSenha(senhaCriptografada);
         jogadorRepository.save(novoJogador);

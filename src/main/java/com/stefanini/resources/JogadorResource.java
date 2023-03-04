@@ -38,7 +38,7 @@ public class JogadorResource {
     @POST
     public Response salvar(@Valid JogadorCadastroDTO dto, @Context UriInfo uriInfo) {
         var jogador = jogadorParser.dtoToEntity(dto);
-        jogadorService.salvar(jogador);
+        jogadorService.salvar(jogador, dto.getIdStefamonInicial());
         var uriBuilder = uriInfo.getBaseUriBuilder();
         uriBuilder.path(jogador.getId().toString()); // Cabeçalho Location
         var jogadorDto = jogadorParser.entityToDto(jogador);
