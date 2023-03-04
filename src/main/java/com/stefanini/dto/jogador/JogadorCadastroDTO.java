@@ -1,9 +1,8 @@
 package com.stefanini.dto.jogador;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.math.BigDecimal;
 
 public class JogadorCadastroDTO {
 
@@ -14,13 +13,13 @@ public class JogadorCadastroDTO {
     @Size(min = 4, max = 10)
     private final String senha;
 
-    @PositiveOrZero
-    private final BigDecimal saldo;
+    @Positive
+    private final Long idStefamonInicial;
 
-    public JogadorCadastroDTO(String nickname, String senha, BigDecimal saldo) {
+    public JogadorCadastroDTO(String nickname, String senha, Long idStefamonInicial) {
         this.nickname = nickname;
         this.senha = senha;
-        this.saldo = saldo;
+        this.idStefamonInicial = idStefamonInicial;
     }
 
     public String getNickname() {
@@ -31,8 +30,7 @@ public class JogadorCadastroDTO {
         return senha;
     }
 
-    public BigDecimal getSaldo() {
-        return saldo;
+    public Long getIdStefamonInicial() {
+        return idStefamonInicial;
     }
-
 }

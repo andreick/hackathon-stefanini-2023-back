@@ -75,6 +75,10 @@ public class Jogador {
         return stefamons;
     }
 
+    public void adicionarStefamon(Stefamon stefamon) {
+        stefamons.add(stefamon);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class JogadorParser {
 
     public Jogador dtoToEntity(JogadorCadastroDTO dto) {
-        return new Jogador(null, dto.getNickname(), dto.getSenha(), dto.getSaldo());
+        return new Jogador(null, dto.getNickname(), dto.getSenha());
     }
 
     public Jogador dtoToEntity(JogadorAtualizacaoDTO dto) {
@@ -21,7 +21,7 @@ public class JogadorParser {
     }
 
     public JogadorDTO entityToDto(Jogador jogador) {
-        return new JogadorDTO(jogador.getId(), jogador.getNickname(), jogador.getSenha(), jogador.getSaldo());
+        return new JogadorDTO(jogador.getId(), jogador.getNickname(), jogador.getSaldo());
     }
 
     public List<JogadorDTO> entityToDto(List<Jogador> jogadores) {

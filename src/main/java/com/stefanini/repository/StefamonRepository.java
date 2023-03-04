@@ -25,4 +25,18 @@ public class StefamonRepository extends GenericDAO<Stefamon, Long> {
                 .setParameter("id", id)
                 .getResultStream().findFirst();
     }
+
+    public List<StefamonDTO> listByPrice(Double price) {
+        return listByPrice(price, 0);
+    }
+
+    public List<StefamonDTO> listByPrice(Double price, int limit) {
+        String jpql = SELECT_STEFAMON_WITH_PRICE + " WHERE " + PRICE + " = :price";
+        var query = getEntityManager().createQuery(jpql, StefamonDTO.class)
+                .setParameter("price", price);
+        if (limit > 0) {
+            query.setMaxResults(limit);
+        }
+        return query.getResultList();
+    }
 }
