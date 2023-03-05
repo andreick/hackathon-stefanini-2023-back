@@ -59,11 +59,12 @@ public class JogadorService {
         return jogadorRepository.listAll();
     }
 
-    public void autenticar(JogadorLoginDTO dto) {
+    public Jogador autenticar(JogadorLoginDTO dto) {
         var jogador = jogadorRepository.findByNickname(dto.getNickname()).orElseThrow(JogadorUnauthorizedException::new);
         String senha = criptografiaService.descriptografar(jogador.getSenha());
         if (!Objects.equals(senha, dto.getSenha())) {
             throw new JogadorUnauthorizedException();
         }
+        return jogador;
     }
 }

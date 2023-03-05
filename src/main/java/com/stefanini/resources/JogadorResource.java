@@ -3,13 +3,18 @@ package com.stefanini.resources;
 import com.stefanini.dto.jogador.JogadorAtualizacaoDTO;
 import com.stefanini.dto.jogador.JogadorCadastroDTO;
 import com.stefanini.dto.jogador.JogadorLoginDTO;
+import com.stefanini.dto.token.AuthTokenDTO;
 import com.stefanini.parser.JogadorParser;
 import com.stefanini.service.JogadorService;
+import com.stefanini.service.TokenService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/jogadores")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,6 +26,9 @@ public class JogadorResource {
 
     @Inject
     private JogadorParser jogadorParser;
+
+    @Inject
+    private TokenService tokenService;
 
     @GET
     @Path("/{id}")
@@ -63,7 +71,8 @@ public class JogadorResource {
     @POST
     @Path("/login")
     public Response login(@Valid JogadorLoginDTO dto) {
-        jogadorService.autenticar(dto);
-        return Response.ok().header(HttpHeaders.AUTHORIZATION, dto.getNickname()).build();
+        var jogador = jogadorService.autenticar(dto);
+        String token = tokenService.generateToken(jogador);
+        return Response.ok().entity(new AuthTokenDTO(token)).build();
     }
 }
