@@ -45,6 +45,10 @@ public class JogadorService {
         return jogador;
     }
 
+    public Jogador pegarPorIdComStefamons(Long id) {
+        return jogadorRepository.findByIdFetchStefamons(id).orElseThrow(() -> new JogadorNotFoundException(id));
+    }
+
     public Jogador alterar(Long id, Jogador jogadorAtualizado) {
         var jogador = pegarPorId(id);
         jogador.setSaldo(jogadorAtualizado.getSaldo());

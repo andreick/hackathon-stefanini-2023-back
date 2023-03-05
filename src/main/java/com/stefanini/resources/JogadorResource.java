@@ -38,6 +38,13 @@ public class JogadorResource {
     }
 
     @GET
+    @Path("/{id}/stefamons")
+    public Response pegarPorIdComStefamons(@PathParam("id") Long id) {
+        var jogadorDto = jogadorParser.entityToDto(jogadorService.pegarPorIdComStefamons(id));
+        return Response.ok(jogadorDto).build();
+    }
+
+    @GET
     public Response listarTodos() {
         var jogadoresDtos = jogadorParser.entityToDto(jogadorService.listarTodos());
         return Response.ok().entity(jogadoresDtos).build();
