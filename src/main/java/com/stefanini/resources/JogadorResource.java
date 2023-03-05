@@ -34,7 +34,7 @@ public class JogadorResource {
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
         var jogadorDto = jogadorParser.entityToDto(jogadorService.pegarPorId(id));
-        return Response.ok().entity(jogadorDto).build();
+        return Response.ok(jogadorDto).build();
     }
 
     @GET
@@ -47,7 +47,7 @@ public class JogadorResource {
     @GET
     public Response listarTodos() {
         var jogadoresDtos = jogadorParser.entityToDto(jogadorService.listarTodos());
-        return Response.ok().entity(jogadoresDtos).build();
+        return Response.ok(jogadoresDtos).build();
     }
 
     @POST
@@ -65,7 +65,7 @@ public class JogadorResource {
     public Response alterar(@PathParam("id") Long id, @Valid JogadorAtualizacaoDTO dto) {
         var jogador = jogadorService.alterar(id, jogadorParser.dtoToEntity(dto));
         var jogadorDto = jogadorParser.entityToDto(jogador);
-        return Response.ok().entity(jogadorDto).build();
+        return Response.ok(jogadorDto).build();
     }
 
     @DELETE
@@ -80,6 +80,6 @@ public class JogadorResource {
     public Response login(@Valid JogadorLoginDTO dto) {
         var jogador = jogadorService.autenticar(dto);
         String token = tokenService.generateToken(jogador);
-        return Response.ok().entity(new AuthTokenDTO(token)).build();
+        return Response.ok(new AuthTokenDTO(token)).build();
     }
 }

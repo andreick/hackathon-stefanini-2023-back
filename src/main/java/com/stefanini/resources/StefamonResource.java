@@ -18,14 +18,13 @@ public class StefamonResource {
     @GET
     public Response listarTodos() {
         var stefamonsDtos = stefamonService.listarTodosComPreco();
-        return Response.ok().entity(stefamonsDtos).build();
+        return Response.ok(stefamonsDtos).build();
     }
 
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
         var stefamonDto = stefamonService.pegarPorIdComPreco(id);
-        return Response.ok().entity(stefamonDto).build();
+        return Response.ok(stefamonDto).build();
     }
-
 }
