@@ -9,32 +9,48 @@ import com.stefanini.repository.JogadorRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
 @ApplicationScoped
 public class JogadorService {
 
+    public static final BigDecimal SALDO_INICIAL = new BigDecimal(3000);
+
     @Inject
     private JogadorRepository jogadorRepository;
 
     @Inject
-    private StefamonService stefamonService;
-
-    @Inject
     private CriptografiaService criptografiaService;
 
+    @Inject
+    private StefamonService stefamonService;
+
     public void salvar(Jogador novoJogador, Long idStefamon) {
-        jogadorRepository.findByNickname(novoJogador.getNickname()).ifPresent((jogador) -> {
-            throw new NicknameConflictException(jogador.getNickname());
+        verificarNickname(novoJogador);
+        criptografarSenha(novoJogador);
+        novoJogador.setSaldo(SALDO_INICIAL);
+        adicionarStefamon(novoJogador, idStefamon);
+        jogadorRepository.save(novoJogador);
+    }
+
+    private void verificarNickname(Jogador jogador) {
+        jogadorRepository.findByNickname(jogador.getNickname()).ifPresent((j) -> {
+            throw new NicknameConflictException(j.getNickname());
         });
+    }
+
+    private void criptografarSenha(Jogador jogador) {
+        String senhaCriptografada = criptografiaService.criptografar(jogador.getSenha());
+        jogador.setSenha(senhaCriptografada);
+    }
+
+    private void adicionarStefamon(Jogador jogador, Long idStefamon) {
         if (!Objects.isNull(idStefamon)) {
             var stefamon = stefamonService.pegarPorId(idStefamon);
-            novoJogador.adicionarStefamon(stefamon);
+            jogador.adicionarStefamon(stefamon);
         }
-        String senhaCriptografada = criptografiaService.criptografar(novoJogador.getSenha());
-        novoJogador.setSenha(senhaCriptografada);
-        jogadorRepository.save(novoJogador);
     }
 
     public Jogador pegarPorId(Long id) {
