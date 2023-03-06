@@ -231,3 +231,6 @@ INSERT INTO desafio.tb_stefamon (id, ataque, defesa, inteligencia, nome, poder, 
 
 INSERT INTO desafio.tb_jogador (nickname, senha, saldo) VALUES ("Yan", "eWFuWmluaG8=", 2900.00);
 INSERT INTO desafio.tb_jogador (nickname, senha, saldo) VALUES ("Jhonnatan", "amhvbm5hdGFu", 700.00);
+
+INSERT INTO desafio.tb_jogador_stefamon (idJogador, idStefamon) VALUES (2, 183);
+INSERT INTO desafio.tb_jogador_stefamon (idJogador, idStefamon) VALUES (2, 49);

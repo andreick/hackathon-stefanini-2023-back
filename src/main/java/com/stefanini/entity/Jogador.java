@@ -2,6 +2,7 @@ package com.stefanini.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,15 +33,15 @@ public class Jogador {
     public Jogador() {
     }
 
-    public Jogador(Long id, String nickname, String senha) {
-        this(id, nickname, senha, null);
-    }
-
     public Jogador(Long id, String nickname, String senha, BigDecimal saldo) {
         this.id = id;
         this.nickname = nickname;
         this.senha = senha;
-        this.saldo = Objects.requireNonNullElse(saldo, BigDecimal.ZERO);
+        this.saldo = saldo;
+    }
+
+    public Jogador(Long id, String nickname, String senha) {
+        this(id, nickname, senha, null);
     }
 
     public Long getId() {
@@ -68,7 +69,7 @@ public class Jogador {
     }
 
     public void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
+        this.saldo = saldo.setScale(2, RoundingMode.HALF_UP);
     }
 
     public List<Stefamon> getStefamons() {

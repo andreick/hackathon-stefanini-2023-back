@@ -13,10 +13,11 @@ public class StefamonRepository extends GenericDAO<Stefamon, Long> {
 
     private static final String PRICE = "ROUND((s.vida + s.ataque + s.defesa + s.inteligencia + s.poder + s.velocidade) / 6.0, 0) * 100";
     private static final String SELECT_STEFAMON_WITH_PRICE = "SELECT NEW " + StefamonDTO.class.getName() +
-            "(s.id, s.nome, s.vida, s.ataque, s.defesa, s.inteligencia, s.poder, s.velocidade, s.urlFoto, " + PRICE + ") FROM Stefamon s";
+            "(s.id, s.nome, s.vida, s.ataque, s.defesa, s.inteligencia, s.poder, s.velocidade, s.urlFoto, " + PRICE + " AS s_price) FROM Stefamon s";
 
     public List<StefamonDTO> listAllWithPrice() {
-        return getEntityManager().createQuery(SELECT_STEFAMON_WITH_PRICE, StefamonDTO.class).getResultList();
+        String jpql = SELECT_STEFAMON_WITH_PRICE + " ORDER BY s_price";
+        return getEntityManager().createQuery(jpql, StefamonDTO.class).getResultList();
     }
 
     public Optional<StefamonDTO> findByIdWithPrice(Long id) {

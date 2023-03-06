@@ -3,13 +3,18 @@ package com.stefanini.resources;
 import com.stefanini.dto.jogador.JogadorAtualizacaoDTO;
 import com.stefanini.dto.jogador.JogadorCadastroDTO;
 import com.stefanini.dto.jogador.JogadorLoginDTO;
+import com.stefanini.dto.token.AuthTokenDTO;
 import com.stefanini.parser.JogadorParser;
 import com.stefanini.service.JogadorService;
+import com.stefanini.service.TokenService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/jogadores")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -22,17 +27,27 @@ public class JogadorResource {
     @Inject
     private JogadorParser jogadorParser;
 
+    @Inject
+    private TokenService tokenService;
+
     @GET
     @Path("/{id}")
     public Response pegarPorId(@PathParam("id") Long id) {
         var jogadorDto = jogadorParser.entityToDto(jogadorService.pegarPorId(id));
-        return Response.ok().entity(jogadorDto).build();
+        return Response.ok(jogadorDto).build();
+    }
+
+    @GET
+    @Path("/{id}/stefamons")
+    public Response pegarPorIdComStefamons(@PathParam("id") Long id) {
+        var jogadorDto = jogadorParser.entityToDto(jogadorService.pegarPorIdComStefamons(id));
+        return Response.ok(jogadorDto).build();
     }
 
     @GET
     public Response listarTodos() {
         var jogadoresDtos = jogadorParser.entityToDto(jogadorService.listarTodos());
-        return Response.ok().entity(jogadoresDtos).build();
+        return Response.ok(jogadoresDtos).build();
     }
 
     @POST
@@ -50,7 +65,7 @@ public class JogadorResource {
     public Response alterar(@PathParam("id") Long id, @Valid JogadorAtualizacaoDTO dto) {
         var jogador = jogadorService.alterar(id, jogadorParser.dtoToEntity(dto));
         var jogadorDto = jogadorParser.entityToDto(jogador);
-        return Response.ok().entity(jogadorDto).build();
+        return Response.ok(jogadorDto).build();
     }
 
     @DELETE
@@ -63,7 +78,8 @@ public class JogadorResource {
     @POST
     @Path("/login")
     public Response login(@Valid JogadorLoginDTO dto) {
-        jogadorService.autenticar(dto);
-        return Response.ok().header(HttpHeaders.AUTHORIZATION, dto.getNickname()).build();
+        var jogador = jogadorService.autenticar(dto);
+        String token = tokenService.generateToken(jogador);
+        return Response.ok(new AuthTokenDTO(token)).build();
     }
 }

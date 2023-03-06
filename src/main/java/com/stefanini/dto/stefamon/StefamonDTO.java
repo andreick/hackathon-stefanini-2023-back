@@ -1,5 +1,8 @@
 package com.stefanini.dto.stefamon;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -14,6 +17,8 @@ public class StefamonDTO {
     private final Integer poder;
     private final Integer velocidade;
     private final String urlFoto;
+
+    @JsonInclude(Include.NON_NULL)
     private final BigDecimal preco;
 
     public StefamonDTO(Long id, String nome, Integer vida, Integer ataque, Integer defesa, Integer inteligencia, Integer poder, Integer velocidade, String urlFoto, BigDecimal preco) {
@@ -26,7 +31,11 @@ public class StefamonDTO {
         this.poder = poder;
         this.velocidade = velocidade;
         this.urlFoto = urlFoto;
-        this.preco = preco.setScale(2, RoundingMode.HALF_UP);
+        this.preco = BigDecimal.ZERO.compareTo(preco) < 0 ? preco.setScale(2, RoundingMode.HALF_UP) : null;
+    }
+
+    public StefamonDTO(Long id, String nome, Integer vida, Integer ataque, Integer defesa, Integer inteligencia, Integer poder, Integer velocidade, String urlFoto) {
+        this(id, nome, vida, ataque, defesa, inteligencia, poder, velocidade, urlFoto, BigDecimal.ZERO);
     }
 
     public StefamonDTO(Long id, String nome, Integer vida, Integer ataque, Integer defesa, Integer inteligencia, Integer poder, Integer velocidade, String urlFoto, Double preco) {
