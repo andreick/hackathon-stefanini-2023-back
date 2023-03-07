@@ -31,4 +31,11 @@ public class StefamonResource {
         var stefamonDto = stefamonParser.entityToDTO(stefamonService.pegarPorId(id));
         return Response.ok(stefamonDto).build();
     }
+
+    @GET
+    @Path("/iniciais")
+    public Response listarStefamonsIniciais() {
+        var stefamonDto = stefamonParser.entityToDTO(stefamonService.listarStefamonsIniciais());
+        return Response.ok(stefamonDto).build();
+    }
 }
