@@ -13,7 +13,7 @@ public class StefamonParser {
     public StefamonDTO entityToDTO(Stefamon stefamon) {
         return new StefamonDTO(stefamon.getId(), stefamon.getNome(), stefamon.getVida(), stefamon.getAtaque(),
                 stefamon.getDefesa(), stefamon.getInteligencia(), stefamon.getPoder(), stefamon.getVelocidade(),
-                stefamon.getUrlFoto());
+                stefamon.getPreco(), stefamon.getUrlFoto());
     }
 
     public List<StefamonDTO> entityToDTO(List<Stefamon> stefamons) {
