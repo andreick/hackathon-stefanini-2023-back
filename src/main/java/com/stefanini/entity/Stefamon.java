@@ -1,6 +1,7 @@
 package com.stefanini.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tb_stefamon")
@@ -32,12 +33,15 @@ public class Stefamon {
     private Integer velocidade;
 
     @Column(nullable = false)
+    private BigDecimal preco;
+
+    @Column(nullable = false)
     private String urlFoto;
 
     public Stefamon() {
     }
 
-    public Stefamon(Long id, String nome, Integer vida, Integer ataque, Integer defesa, Integer inteligencia, Integer poder, Integer velocidade, String urlFoto) {
+    public Stefamon(Long id, String nome, Integer vida, Integer ataque, Integer defesa, Integer inteligencia, Integer poder, Integer velocidade, BigDecimal preco, String urlFoto) {
         this.id = id;
         this.nome = nome;
         this.vida = vida;
@@ -46,6 +50,7 @@ public class Stefamon {
         this.inteligencia = inteligencia;
         this.poder = poder;
         this.velocidade = velocidade;
+        this.preco = preco;
         this.urlFoto = urlFoto;
     }
 
@@ -107,6 +112,14 @@ public class Stefamon {
 
     public void setVelocidade(Integer velocidade) {
         this.velocidade = velocidade;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
     public String getUrlFoto() {
