@@ -1,20 +1,28 @@
 ![Logo do Desafio](./desafio/header.png)
-### Desafio Hackathon Stefanini
+### Back-end proposto no Desafio Hackathon Stefanini 2023
+
+![Status: Em Desenvolvimento](https://img.shields.io/static/v1?label=Status&message=Em%20Desenvolvimento&color=GREEN&style=for-the-badge%22)
+
+| [Vitrine.Dev](https://cursos.alura.com.br/vitrinedev/andreick) | |
+| - | - |
+| :sparkles: Nome       | **StefaMon** |
+| :label: Tecnologias   | Java 11, Quarkus, Maven, MySQL |
+| :rocket: Demonstração | [Vídeo no LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7038636588406386688/) |
 
 # StefaMon:
 ### StefaMon é um sistema de rinha de criaturas mágicas onde jogadores disputam batalhas acirradas em busca de ser o melhor treinador. Vença as batalhas e conquiste seu lugar no ranking.
 
 # Objetivos Principais:
-- ### **Consertar os diversos bugs que estão na aplicação;**
+- [x] **Consertar os diversos bugs que estão na aplicação;**
 
 
-- ### **Desenvolver um sistema que obedeça as boas práticas de programação;**
+- [x] **Desenvolver um sistema que obedeça as boas práticas de programação;**
     - Root da api deve ser a url ‘/api’; ex: localhost:8080/api/…
     - Os end-points devem obedecer aos verbos HTTPs corretos;
     - Princípio da responsabilidade única;
 
 
--   ### **Criar a entidade (JAVA) Jogador com os atributos:**
+- [x] **Criar a entidade (JAVA) Jogador com os atributos:**
 
     -   **Nickname**:
         -   Obrigatório;
@@ -32,24 +40,24 @@
         -   Deverá ter um valor padrão (Você escolhe)
 
 
--   ### **Criar funcionalidade de cadastro de Jogador**
+- [x] **Criar funcionalidade de cadastro de Jogador**
     -   Obedecendo os critérios da Entidade Jogador:
 
 
--   ### **Criar funcionalidade de login que valide o nickname e senha salvos no banco de dados;**
+- [x] **Criar funcionalidade de login que valide o nickname e senha salvos no banco de dados;**
     -   Mostrar mensagem de erro (mensagem a sua escolha) caso os dados informados estejam incorretos;
     -   Somente jogadores cadastrados poderão batalhar;
     -   Apenas uma validação simples não é necessário implementar nenhum framework de autenticação;
 
 
--   ### **Criar a funcionalidade de comprar/escolher StefaMons;**
+- [ ] **Criar a funcionalidade de comprar/escolher StefaMons;**
     -   O preço do StefaMon será uma média do valor dos seus atributos;
         -   Esse preço não é persistido em banco, será calculado em tempo de execução e será implementado como quiser;
     -   O jogador poderá ter no máximo 6 StefaMons e no mínimo 1 StefaMon para batalhar;
     -   Pode ser feito na hora de cadastro ou após o primeiro login;
 
 
--   ### **Criar funcionalidade de Batalha (poderá ser implementada como quiser) respeitando os seguintes critérios:**
+- [ ] **Criar funcionalidade de Batalha (poderá ser implementada como quiser) respeitando os seguintes critérios:**
     - **A Batalha é composta pela quantidade de StefaMons de cada Jogador**
       - Ex: Jogador1 tem 4 Stefamons X Jogador2 tem 6 StefaMons
     - **Criar o modo de batalha contra outro Jogador;**
@@ -72,18 +80,16 @@
 
 ---
 # Objetivos Extras:
--   ### **Criar um ranking de jogadores;**
+- [ ] **Criar um ranking de jogadores;**
     -   Mostrar um ranking de jogadores que mais venceram batalhas;
--   ### **Apresentar um LOG do ocorrido na batalha;**
+- [ ] **Apresentar um LOG do ocorrido na batalha;**
     -   Movimentos (Ataques e defesas) de cada StefaMon;
     -   Derrota de cada StefaMon;
--   ### **Funcionalidade de histórico de batalhas (histórico de partida);**
+- [ ] **Funcionalidade de histórico de batalhas (histórico de partida);**
     -   Mostrar cada batalha do Jogador, vitórias e derrotas;
     -   Preferencialmente apresentando o LOG de batalha também;
--   ### **Criar um redirecionamento para uma página Not Found quando acessar uma URL que não existe no Frontend;**
--   ### **Desenvolver funcionalidades a sua escolha;**
-    -   Fique a vontade de desenvolver novas funcionalidades para o desafio, lembrando que os objetivos extras 
-    só serão avaliadas se os objetivos principais estiverem concluídos;
+- [ ] **Criar um redirecionamento para uma página Not Found quando acessar uma URL que não existe no Frontend;**
+- [ ] **Desenvolver outras funcionalidades**
 ---
 
 # Tabelas:
@@ -113,6 +119,10 @@ Jogo baseado em:
 [https://www.tuxemon.org/](https://www.tuxemon.org/)
 
 ---
+
+# Front-end
+
+- https://github.com/andreick/hackathon-stefanini-2023-front
 
 # Arquitetura do projeto
 - [Instruções Arquiteturais](./Instruções.md)
@@ -162,4 +172,4 @@ Use o seguinte comando para iniciar o servidor:<br/>
 - MySQL ([guia](https://dev.mysql.com/doc/))
 
 Opcionais:
-- Docker([guia](https://docs.docker.com/))
+- Docker ([guia](https://docs.docker.com/))
