@@ -1,5 +1,5 @@
-![Logo do Desafio](./desafio/header.png)
-### Back-end proposto no Desafio Hackathon Stefanini 2023
+![Logo do Desafio](./desafio/header.png#vitrinedev)
+### Back-end para o Desafio Hackathon Stefanini 2023
 
 ![Status: Em Desenvolvimento](https://img.shields.io/static/v1?label=Status&message=Em%20Desenvolvimento&color=GREEN&style=for-the-badge%22)
 
@@ -88,8 +88,7 @@
 - [ ] **Funcionalidade de histórico de batalhas (histórico de partida);**
     -   Mostrar cada batalha do Jogador, vitórias e derrotas;
     -   Preferencialmente apresentando o LOG de batalha também;
-- [ ] **Criar um redirecionamento para uma página Not Found quando acessar uma URL que não existe no Frontend;**
-- [ ] **Desenvolver outras funcionalidades**
+- [ ] **Desenvolver outras funcionalidades.**
 ---
 
 # Tabelas:
